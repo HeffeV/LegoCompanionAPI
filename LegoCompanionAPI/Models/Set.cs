@@ -9,6 +9,7 @@ namespace LegoCompanionAPI.Models
     public class Set
     {
         public long SetID { get; set; }
+        public string SetName { get; set; }
         public int LegoCode { get; set; }
         public int Age { get; set; }
         public int Pieces { get; set; }
@@ -16,7 +17,7 @@ namespace LegoCompanionAPI.Models
         public Theme Theme { get; set; }
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime ReleaseDate { get; set; }
-        public long DimensionsID { get; set; }
+        public long? DimensionsID { get; set; }
 
 
         public Dimensions Dimensions { get; set; }

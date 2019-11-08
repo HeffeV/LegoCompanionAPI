@@ -1,5 +1,7 @@
 ﻿public enum Color
 {
     Blue,
-    Green 
+    Green,
+    DarkBluishGray,
+    Black
 }
