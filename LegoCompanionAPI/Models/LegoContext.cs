@@ -11,9 +11,15 @@ namespace LegoCompanionAPI.Models
         public LegoContext(DbContextOptions<LegoContext> options) : base(options) 
         { }
         public DbSet<Part> Parts { get; set; }
+        public DbSet<Set> Sets { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<Dimensions> Dimensions { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         { 
-            modelBuilder.Entity<Part>().ToTable("Part"); 
+            modelBuilder.Entity<Part>().ToTable("Part");
+            modelBuilder.Entity<Set>().ToTable("Set");
+            modelBuilder.Entity<Image>().ToTable("Image");
+            modelBuilder.Entity<Dimensions>().ToTable("Dimensions");
         }
     }
 }
