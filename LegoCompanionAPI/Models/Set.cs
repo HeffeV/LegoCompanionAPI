@@ -16,8 +16,11 @@ namespace LegoCompanionAPI.Models
         public Theme Theme { get; set; }
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime ReleaseDate { get; set; }
+        public long DimensionsID { get; set; }
 
-        public ICollection<Part> Parts { get; set; }
+
+        public Dimensions Dimensions { get; set; }
+        public ICollection<SetPart> SetParts { get; set; }
         public ICollection<Image> Images { get; set; }
     }
 }

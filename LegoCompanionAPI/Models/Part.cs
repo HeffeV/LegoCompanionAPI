@@ -12,8 +12,11 @@ namespace LegoCompanionAPI.Models
         public int LegoCode { get; set; }
         public double Price { get; set; }
         public Color Color { get; set; }
+        public long DimensionsID { get; set; }
 
-        public ICollection<Set> Sets { get; set; }
+
+        public Dimensions Dimensions { get; set; }
+        public ICollection<SetPart> SetParts { get; set; }
         public ICollection<Image> Images { get; set; }
     }
 }
