@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29326.143
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegoCompanionAPI", "LegoCompanionAPI\LegoCompanionAPI.csproj", "{6568B902-7650-447E-9575-FCFD8404E6DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6568B902-7650-447E-9575-FCFD8404E6DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6568B902-7650-447E-9575-FCFD8404E6DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6568B902-7650-447E-9575-FCFD8404E6DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6568B902-7650-447E-9575-FCFD8404E6DE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E6C8F2C5-2FB6-4007-93C4-C64134C147CD}
+	EndGlobalSection
+EndGlobal

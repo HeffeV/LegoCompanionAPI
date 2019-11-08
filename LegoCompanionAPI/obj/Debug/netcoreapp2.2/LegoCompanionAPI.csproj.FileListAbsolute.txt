@@ -1,0 +1,16 @@
+C:\Users\jeffv\Documents\Lego companion\LegoCompanionAPI\LegoCompanionAPI\LegoCompanionAPI\bin\Debug\netcoreapp2.2\appsettings.Development.json
+C:\Users\jeffv\Documents\Lego companion\LegoCompanionAPI\LegoCompanionAPI\LegoCompanionAPI\bin\Debug\netcoreapp2.2\appsettings.json
+C:\Users\jeffv\Documents\Lego companion\LegoCompanionAPI\LegoCompanionAPI\LegoCompanionAPI\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
+C:\Users\jeffv\Documents\Lego companion\LegoCompanionAPI\LegoCompanionAPI\LegoCompanionAPI\bin\Debug\netcoreapp2.2\LegoCompanionAPI.deps.json
+C:\Users\jeffv\Documents\Lego companion\LegoCompanionAPI\LegoCompanionAPI\LegoCompanionAPI\bin\Debug\netcoreapp2.2\LegoCompanionAPI.runtimeconfig.json
+C:\Users\jeffv\Documents\Lego companion\LegoCompanionAPI\LegoCompanionAPI\LegoCompanionAPI\bin\Debug\netcoreapp2.2\LegoCompanionAPI.runtimeconfig.dev.json
+C:\Users\jeffv\Documents\Lego companion\LegoCompanionAPI\LegoCompanionAPI\LegoCompanionAPI\bin\Debug\netcoreapp2.2\LegoCompanionAPI.dll
+C:\Users\jeffv\Documents\Lego companion\LegoCompanionAPI\LegoCompanionAPI\LegoCompanionAPI\obj\Debug\netcoreapp2.2\LegoCompanionAPI.csprojAssemblyReference.cache
+C:\Users\jeffv\Documents\Lego companion\LegoCompanionAPI\LegoCompanionAPI\LegoCompanionAPI\obj\Debug\netcoreapp2.2\LegoCompanionAPI.RazorAssemblyInfo.cache
+C:\Users\jeffv\Documents\Lego companion\LegoCompanionAPI\LegoCompanionAPI\LegoCompanionAPI\obj\Debug\netcoreapp2.2\LegoCompanionAPI.RazorAssemblyInfo.cs
+C:\Users\jeffv\Documents\Lego companion\LegoCompanionAPI\LegoCompanionAPI\LegoCompanionAPI\obj\Debug\netcoreapp2.2\LegoCompanionAPI.AssemblyInfoInputs.cache
+C:\Users\jeffv\Documents\Lego companion\LegoCompanionAPI\LegoCompanionAPI\LegoCompanionAPI\obj\Debug\netcoreapp2.2\LegoCompanionAPI.AssemblyInfo.cs
+C:\Users\jeffv\Documents\Lego companion\LegoCompanionAPI\LegoCompanionAPI\LegoCompanionAPI\obj\Debug\netcoreapp2.2\LegoCompanionAPI.RazorTargetAssemblyInfo.cache
+C:\Users\jeffv\Documents\Lego companion\LegoCompanionAPI\LegoCompanionAPI\LegoCompanionAPI\bin\Debug\netcoreapp2.2\LegoCompanionAPI.pdb
+C:\Users\jeffv\Documents\Lego companion\LegoCompanionAPI\LegoCompanionAPI\LegoCompanionAPI\obj\Debug\netcoreapp2.2\LegoCompanionAPI.dll
+C:\Users\jeffv\Documents\Lego companion\LegoCompanionAPI\LegoCompanionAPI\LegoCompanionAPI\obj\Debug\netcoreapp2.2\LegoCompanionAPI.pdb
