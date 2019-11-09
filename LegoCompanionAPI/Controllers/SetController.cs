@@ -36,7 +36,6 @@ namespace LegoCompanionAPI.Controllers
                 .Include(e => e.Images)
                 .Include(e => e.Dimensions)
                 .Include(e => e.SetParts).ThenInclude(e=>e.Part).ThenInclude(e=>e.Images)
-                .Include(e => e.SetParts).ThenInclude(e => e.Part).ThenInclude(e => e.Dimensions)
                 .ToListAsync();
         }
 

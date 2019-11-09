@@ -15,8 +15,7 @@ namespace LegoCompanionAPI.Models
         public int Pieces { get; set; }
         public double Price { get; set; }
         public Theme Theme { get; set; }
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime ReleaseDate { get; set; }
+        public int ReleaseYear { get; set; }
         public long? DimensionsID { get; set; }
 
 

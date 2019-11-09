@@ -3,5 +3,7 @@
     Blue,
     Green,
     DarkBluishGray,
-    Black
+    Black,
+    Red,
+    Yellow
 }
