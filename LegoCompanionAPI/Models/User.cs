@@ -10,6 +10,8 @@ namespace LegoCompanionAPI.Models
     {
         public int UserID { get; set; }
         public string GoogleID { get; set; }
+        public string Email { get; set; }
+        public string Name { get; set; }
 
         public ICollection<Part> FavoriteParts { get; set; }
         public ICollection<Part> WishlistParts { get; set; }
