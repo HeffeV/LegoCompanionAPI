@@ -23,7 +23,7 @@ namespace LegoCompanionAPI.Models
             set.SetName = "Liebherr R 9800 Excavator";
             set.Price = 449.99;
             set.ReleaseYear = 2019;
-            set.Theme = Theme.Technic;
+            set.Theme = "Technic";
             set.Dimensions = new Dimensions()
             {
                 Length = 65,
@@ -43,7 +43,7 @@ namespace LegoCompanionAPI.Models
             Part part1 = new Part()
             {
                 PartName = "Technic Digger Bucket 10 x 19",
-                Color = Color.DarkBluishGray,
+                Color = "Dark Bluish Gray",
                 Images = new List<Image>()
                 {
                     new Image() {
@@ -57,7 +57,7 @@ namespace LegoCompanionAPI.Models
             Part part2 = new Part()
             {
                 PartName = "Plate 1 x 2",
-                Color = Color.Black,
+                Color = "Black",
                 Images = new List<Image>()
                 {
                     new Image() {
@@ -109,7 +109,7 @@ namespace LegoCompanionAPI.Models
             };
             setTruck.Price = 119.99;
             setTruck.ReleaseYear = 2005;
-            setTruck.Theme = Theme.Technic;
+            setTruck.Theme = "Technic";
             setTruck.SetName = "Tow Truck";
             setTruck.Pieces = 1877;
             setTruck.LegoCode = 8285;
@@ -118,7 +118,7 @@ namespace LegoCompanionAPI.Models
             Part part3 = new Part()
             {
                 PartName = "Pneumatic Pump Second Version with Black Top",
-                Color = Color.Yellow,
+                Color = "Yellow",
                 Images = new List<Image>()
                 {
                     new Image() {
@@ -133,7 +133,7 @@ namespace LegoCompanionAPI.Models
             Part part4 = new Part()
             {
                 PartName = "Technic Hook Large Metal",
-                Color = Color.Black,
+                Color = "Black",
                 Images = new List<Image>()
                 {
                     new Image() {
@@ -185,7 +185,7 @@ namespace LegoCompanionAPI.Models
             };
             setBulldozer.Price = 154.99;
             setBulldozer.ReleaseYear = 2007;
-            setBulldozer.Theme = Theme.Technic;
+            setBulldozer.Theme = "Technic";
             setBulldozer.SetName = "Motorized Bulldozer";
             setBulldozer.Pieces = 1384;
             setBulldozer.LegoCode = 8275;
@@ -195,7 +195,7 @@ namespace LegoCompanionAPI.Models
             Part part5 = new Part()
             {
                 PartName = "M Cross Axle W. Groove",
-                Color = Color.Red,
+                Color = "Red",
                 Images = new List<Image>()
                 {
                     new Image() {
@@ -210,7 +210,7 @@ namespace LegoCompanionAPI.Models
             Part part6 = new Part()
             {
                 PartName = "Electric, Power Functions Receiver Unit",
-                Color = Color.DarkBluishGray,
+                Color = "Dark Bluish Gray",
                 Images = new List<Image>()
                 {
                     new Image() {

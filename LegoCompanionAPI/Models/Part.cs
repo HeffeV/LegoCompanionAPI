@@ -11,7 +11,7 @@ namespace LegoCompanionAPI.Models
         public string PartName { get; set; }
         public int LegoCode { get; set; }
         public double Price { get; set; }
-        public Color Color { get; set; }
+        public string Color { get; set; }
 
         public ICollection<SetPart> SetParts { get; set; }
         public ICollection<Image> Images { get; set; }

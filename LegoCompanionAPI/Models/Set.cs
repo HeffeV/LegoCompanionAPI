@@ -14,7 +14,7 @@ namespace LegoCompanionAPI.Models
         public int Age { get; set; }
         public int Pieces { get; set; }
         public double Price { get; set; }
-        public Theme Theme { get; set; }
+        public string Theme { get; set; }
         public int ReleaseYear { get; set; }
         public long? DimensionsID { get; set; }
 
