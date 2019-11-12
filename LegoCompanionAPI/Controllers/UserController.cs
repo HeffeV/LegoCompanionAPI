@@ -28,7 +28,8 @@ namespace LegoCompanionAPI.Controllers
         }
 
         // GET: api/User/5
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("UserData")]
         public async Task<ActionResult<User>> GetUser(string id,string email)
         {
             User user = await _context.User.FirstOrDefaultAsync(e => e.GoogleID==id&e.Email==email);

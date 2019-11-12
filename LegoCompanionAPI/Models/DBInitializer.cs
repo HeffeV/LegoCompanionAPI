@@ -240,7 +240,6 @@ namespace LegoCompanionAPI.Models
             context.Sets.Add(setBulldozer);
 
             User user = new User();
-            user.Name = "Tester";
             user.GoogleID = "123";
             user.Email = "456";
             user.CollectionParts = new List<Part>();
