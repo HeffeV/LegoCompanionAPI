@@ -11,13 +11,12 @@ namespace LegoCompanionAPI.Models
         public int UserID { get; set; }
         public string GoogleID { get; set; }
         public string Email { get; set; }
-        public string Name { get; set; }
 
         public ICollection<Part> FavoriteParts { get; set; }
         public ICollection<Part> WishlistParts { get; set; }
         public ICollection<Set> FavoriteSets { get; set; }
         public ICollection<Set> WishlistSets { get; set; }
         public ICollection<Part> CollectionParts { get; set; }
-        public ICollection<Part> CollectionSets { get; set; }
+        public ICollection<Set> CollectionSets { get; set; }
     }
 }

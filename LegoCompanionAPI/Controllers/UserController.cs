@@ -29,15 +29,21 @@ namespace LegoCompanionAPI.Controllers
 
         // GET: api/User/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<User>> GetUser(string id,string email)
         {
-            var user = await _context.User.FindAsync(id);
+            User user = await _context.User.FirstOrDefaultAsync(e => e.GoogleID==id&e.Email==email);
 
             if (user == null)
             {
-                return NotFound();
-            }
+                user = new User()
+                {
+                    GoogleID = id,
+                    Email = email,
+                };
 
+                _context.User.Add(user);
+            }
+            await _context.SaveChangesAsync();
             return user;
         }
 
