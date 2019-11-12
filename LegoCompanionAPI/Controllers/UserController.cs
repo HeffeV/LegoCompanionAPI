@@ -30,14 +30,15 @@ namespace LegoCompanionAPI.Controllers
         // GET: api/User/5
         [HttpGet]
         [Route("UserData")]
-        public async Task<ActionResult<User>> GetUser(string id,string email)
+        public async Task<ActionResult<User>> GetUserData(string id,string email)
         {
-            User user = await _context.User.Include(e=>e.CollectionParts)
-                .Include(e => e.CollectionSets)
+            User user = await _context.User
+                /*.Include(e=>e.CollectionParts)
+                //.Include(e => e.CollectionSets)
                 .Include(e => e.FavoriteParts)
-                .Include(e => e.FavoriteSets)
-                .Include(e => e.WishlistParts)
-                .Include(e => e.WishlistSets)
+                //.Include(e => e.FavoriteSets)
+                .Include(e => e.WishlistParts)*/
+                .Include(e => e.WishlistSets).ThenInclude(e=>e.Images)
                 .FirstOrDefaultAsync(e => e.GoogleID==id&e.Email==email);
 
             if (user == null)

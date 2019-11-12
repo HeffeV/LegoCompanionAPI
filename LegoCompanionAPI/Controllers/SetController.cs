@@ -40,15 +40,15 @@ namespace LegoCompanionAPI.Controllers
                 .ToListAsync();
         }
 
-        // GET: api/AddSetToWishList
+        /* GET: api/AddSetToWishList
         [HttpPost]
         [Route("AddSetToWishList")]
         public async Task<ActionResult<User>> AddSetToWishlist(int userId, long setId)
         {
             User user = await _context.User.Include(e => e.CollectionParts)
-                .Include(e => e.CollectionSets)
+                //.Include(e => e.CollectionSets)
                 .Include(e => e.FavoriteParts)
-                .Include(e => e.FavoriteSets)
+                //.Include(e => e.FavoriteSets)
                 .Include(e => e.WishlistParts)
                 .Include(e => e.WishlistSets)
                 .FirstOrDefaultAsync(e => e.UserID == userId);
@@ -63,7 +63,7 @@ namespace LegoCompanionAPI.Controllers
             await _context.SaveChangesAsync();
 
             return user;
-        }
+        }*/
 
         // GET: api/Set/5
         [HttpGet("{id}")]
