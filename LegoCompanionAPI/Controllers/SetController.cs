@@ -53,8 +53,12 @@ namespace LegoCompanionAPI.Controllers
                 .Include(e => e.WishlistSets)
                 .FirstOrDefaultAsync(e => e.UserID == userId);
 
-            Set set = await _context.Sets.FirstOrDefaultAsync(e => e.SetID == setId);
-            user.WishlistSets.Add(set);
+            UserSet userSet = new UserSet()
+            {
+                SetID = setId,
+                UserID = userId
+            };
+            user.WishlistSets.Add(userSet);
 
             await _context.SaveChangesAsync();
 
