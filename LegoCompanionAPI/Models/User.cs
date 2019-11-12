@@ -14,9 +14,9 @@ namespace LegoCompanionAPI.Models
 
         public ICollection<Part> FavoriteParts { get; set; }
         public ICollection<Part> WishlistParts { get; set; }
-        public ICollection<Set> FavoriteSets { get; set; }
-        public ICollection<Set> WishlistSets { get; set; }
+        public ICollection<UserSet> FavoriteSets { get; set; }
+        public ICollection<UserSet> WishlistSets { get; set; }
         public ICollection<Part> CollectionParts { get; set; }
-        public ICollection<Set> CollectionSets { get; set; }
+        public ICollection<UserSet> CollectionSets { get; set; }
     }
 }
