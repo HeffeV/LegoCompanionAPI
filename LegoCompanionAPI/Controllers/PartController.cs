@@ -31,7 +31,10 @@ namespace LegoCompanionAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Part>> GetPart(long id)
         {
-            var part = await _context.Parts.FindAsync(id);
+            Part part = await _context.Parts
+                .Include(e => e.Images)
+                .Include(e => e.SetParts).ThenInclude(e => e.Set).ThenInclude(e => e.Images)
+                .Include(e => e.SetParts).ThenInclude(e => e.Set).ThenInclude(e => e.Dimensions).FirstOrDefaultAsync(e=>e.PartID==id);
 
             if (part == null)
             {
@@ -39,6 +42,17 @@ namespace LegoCompanionAPI.Controllers
             }
 
             return part;
+        }
+
+        [HttpGet]
+        [Route("PartsWithSets")]
+        public async Task<ActionResult<IEnumerable<Part>>> GetPartsWithSets()
+        {
+            return await _context.Parts
+                .Include(e => e.Images)
+                .Include(e => e.SetParts).ThenInclude(e => e.Set).ThenInclude(e => e.Images)
+                .Include(e => e.SetParts).ThenInclude(e => e.Set).ThenInclude(e => e.Dimensions)
+                .ToListAsync();
         }
 
         // PUT: api/Part/5
