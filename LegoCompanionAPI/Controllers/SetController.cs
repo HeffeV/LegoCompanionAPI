@@ -69,7 +69,10 @@ namespace LegoCompanionAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Set>> GetSet(long id)
         {
-            var @set = await _context.Sets.FindAsync(id);
+            Set @set = await _context.Sets
+                .Include(e => e.Images)
+                .Include(e => e.Dimensions)
+                .Include(e => e.SetParts).ThenInclude(e => e.Part).ThenInclude(e => e.Images).FirstOrDefaultAsync(e=>e.SetID==id);
 
             if (@set == null)
             {
