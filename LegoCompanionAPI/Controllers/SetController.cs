@@ -40,107 +40,146 @@ namespace LegoCompanionAPI.Controllers
                 .ToListAsync();
         }
 
-        /* GET: api/AddSetToWishList
-        [HttpPost]
+        [HttpGet]
         [Route("AddSetToWishList")]
-        public async Task<ActionResult<User>> AddSetToWishlist(int userId, long setId)
+        public async Task<ActionResult<User>> AddSetToWishlist(long userId, long setId)
         {
-            User user = await _context.User.Include(e => e.CollectionParts)
-                //.Include(e => e.CollectionSets)
-                .Include(e => e.FavoriteParts)
-                //.Include(e => e.FavoriteSets)
-                .Include(e => e.WishlistParts)
-                .Include(e => e.WishlistSets)
-                .FirstOrDefaultAsync(e => e.UserID == userId);
+            User user = await ReturnUser(userId);
 
-            UserSet userSet = new UserSet()
+            Set set = await ReturnSet(setId);
+
+            if (!user.WishlistSets.Contains(set))
             {
-                SetID = setId,
-                UserID = userId
-            };
-            user.WishlistSets.Add(userSet);
+                user.WishlistSets.Add(set);
+            }
+
+            _context.Entry(user).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return user;
+        }
+
+        [HttpGet]
+        [Route("AddSetToFavorites")]
+        public async Task<ActionResult<User>> AddSetToFavorites(long userId, long setId)
+        {
+            User user = await ReturnUser(userId);
+
+            Set set = await ReturnSet(setId);
+
+            if (!user.FavoriteSets.Contains(set))
+            {
+                user.FavoriteSets.Add(set);
+            }
+
+            _context.Entry(user).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return user;
+        }
+
+        [HttpGet]
+        [Route("AddSetToCollection")]
+        public async Task<ActionResult<User>> AddSetToCollection(long userId, long setId)
+        {
+            User user = await ReturnUser(userId);
+
+            Set set = await ReturnSet(setId);
+
+            if (!user.CollectionSets.Contains(set))
+            {
+                user.CollectionSets.Add(set);
+            }
+            _context.Entry(user).State = EntityState.Modified;
 
             await _context.SaveChangesAsync();
 
             return user;
-        }*/
+        }
+
+        [HttpGet]
+        [Route("RemoveSetFromWishlist")]
+        public async Task<ActionResult<User>> RemoveSetFromWishlist(long userId, long setId)
+        {
+            User user = await ReturnUser(userId);
+
+            Set set = user.WishlistSets.FirstOrDefault(e => e.SetID == setId);
+
+            user.WishlistSets.Remove(set);
+
+            _context.Entry(user).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return user;
+        }
+
+        [HttpGet]
+        [Route("RemoveSetFromFavorites")]
+        public async Task<ActionResult<User>> RemoveSetFromFavorites(long userId, long setId)
+        {
+            User user = await ReturnUser(userId);
+
+            Set set = user.FavoriteSets.FirstOrDefault(e => e.SetID == setId);
+
+            user.FavoriteSets.Remove(set);
+
+            _context.Entry(user).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return user;
+        }
+
+        [HttpGet]
+        [Route("RemoveSetFromCollection")]
+        public async Task<ActionResult<User>> RemoveSetFromCollection(long userId, long setId)
+        {
+            User user = await ReturnUser(userId);
+
+            Set set = user.CollectionSets.FirstOrDefault(e => e.SetID == setId);
+
+            user.CollectionSets.Remove(set);
+
+            _context.Entry(user).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return user;
+        }
 
         // GET: api/Set/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Set>> GetSet(long id)
         {
-            Set @set = await _context.Sets
+            Set @set = await ReturnSet(id);
+
+            if (@set == null)
+            {
+                return NotFound();
+            }
+
+            return @set;
+        }
+
+        private async Task<Set> ReturnSet(long setID)
+        {
+            Set set =await _context.Sets
                 .Include(e => e.Images)
                 .Include(e => e.Dimensions)
-                .Include(e => e.SetParts).ThenInclude(e => e.Part).ThenInclude(e => e.Images).FirstOrDefaultAsync(e=>e.SetID==id);
+                .Include(e => e.SetParts).ThenInclude(e => e.Part).ThenInclude(e => e.Images)
+                .FirstOrDefaultAsync(e => e.SetID == setID);
 
-            if (@set == null)
-            {
-                return NotFound();
-            }
-
-            return @set;
+            return set;
         }
 
-        // PUT: api/Set/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutSet(long id, Set @set)
-        {
-            if (id != @set.SetID)
-            {
-                return BadRequest();
-            }
+        private async Task<User> ReturnUser(long userID) {
+            User user = await _context.User.Include(e => e.CollectionParts)
+                .Include(e => e.CollectionSets)
+                .Include(e => e.FavoriteParts)
+                .Include(e => e.FavoriteSets)
+                .Include(e => e.WishlistParts)
+                .Include(e => e.WishlistSets)
+                .FirstOrDefaultAsync(e => e.UserID == userID);
 
-            _context.Entry(@set).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SetExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Set
-        [HttpPost]
-        public async Task<ActionResult<Set>> PostSet(Set @set)
-        {
-            _context.Sets.Add(@set);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetSet", new { id = @set.SetID }, @set);
-        }
-
-        // DELETE: api/Set/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Set>> DeleteSet(long id)
-        {
-            var @set = await _context.Sets.FindAsync(id);
-            if (@set == null)
-            {
-                return NotFound();
-            }
-
-            _context.Sets.Remove(@set);
-            await _context.SaveChangesAsync();
-
-            return @set;
-        }
-
-        private bool SetExists(long id)
-        {
-            return _context.Sets.Any(e => e.SetID == id);
+            return user;
         }
     }
 }
