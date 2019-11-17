@@ -20,13 +20,6 @@ namespace LegoCompanionAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Part
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Part>>> GetParts()
-        {
-            return await _context.Parts.ToListAsync();
-        }
-
         // GET: api/Part/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Part>> GetPart(long id)
@@ -55,65 +48,133 @@ namespace LegoCompanionAPI.Controllers
                 .ToListAsync();
         }
 
-        // PUT: api/Part/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPart(long id, Part part)
+        [HttpGet]
+        [Route("AddSetToWishList")]
+        public async Task<ActionResult<User>> AddSetToWishlist(long userId, long partId)
         {
-            if (id != part.PartID)
+            User user = await ReturnUser(userId);
+
+            Part part = await ReturnPart(partId);
+
+            if (!user.WishlistParts.Contains(part))
             {
-                return BadRequest();
+                user.WishlistParts.Add(part);
             }
 
-            _context.Entry(part).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PartExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Part
-        [HttpPost]
-        public async Task<ActionResult<Part>> PostPart(Part part)
-        {
-            _context.Parts.Add(part);
+            _context.Entry(user).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPart", new { id = part.PartID }, part);
+            return user;
         }
 
-        // DELETE: api/Part/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Part>> DeletePart(long id)
+        [HttpGet]
+        [Route("AddPartToFavorites")]
+        public async Task<ActionResult<User>> AddPartToFavorites(long userId, long partId)
         {
-            var part = await _context.Parts.FindAsync(id);
-            if (part == null)
+            User user = await ReturnUser(userId);
+
+            Part part = await ReturnPart(partId);
+
+            if (!user.FavoriteParts.Contains(part))
             {
-                return NotFound();
+                user.FavoriteParts.Add(part);
             }
 
-            _context.Parts.Remove(part);
+            _context.Entry(user).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+
+            return user;
+        }
+
+        [HttpGet]
+        [Route("AddPartToCollection")]
+        public async Task<ActionResult<User>> AddPartToCollection(long userId, long partId)
+        {
+            User user = await ReturnUser(userId);
+
+            Part part = await ReturnPart(partId);
+
+            if (!user.CollectionParts.Contains(part))
+            {
+                user.CollectionParts.Add(part);
+            }
+            _context.Entry(user).State = EntityState.Modified;
+
+            await _context.SaveChangesAsync();
+
+            return user;
+        }
+
+        [HttpGet]
+        [Route("RemovePartFromWishlist")]
+        public async Task<ActionResult<User>> RemovePartFromWishlist(long userId, long partId)
+        {
+            User user = await ReturnUser(userId);
+
+            Part part = user.WishlistParts.FirstOrDefault(e => e.PartID == partId);
+
+            user.WishlistParts.Remove(part);
+
+            _context.Entry(user).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return user;
+        }
+
+        [HttpGet]
+        [Route("RemovePartFromFavorites")]
+        public async Task<ActionResult<User>> RemovePartFromFavorites(long userId, long partId)
+        {
+            User user = await ReturnUser(userId);
+
+            Part part = user.FavoriteParts.FirstOrDefault(e => e.PartID == partId);
+
+            user.FavoriteParts.Remove(part);
+
+            _context.Entry(user).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return user;
+        }
+
+        [HttpGet]
+        [Route("RemovePartFromCollection")]
+        public async Task<ActionResult<User>> RemovePartFromCollection(long userId, long partId)
+        {
+            User user = await ReturnUser(userId);
+
+            Part part = user.CollectionParts.FirstOrDefault(e => e.PartID == partId);
+
+            user.CollectionParts.Remove(part);
+
+            _context.Entry(user).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return user;
+        }
+
+        private async Task<Part> ReturnPart(long partID)
+        {
+            Part part = await _context.Parts
+                .Include(e => e.Images)
+                .Include(e => e.SetParts).ThenInclude(e => e.Set).ThenInclude(e => e.Images)
+                .Include(e => e.SetParts).ThenInclude(e => e.Set).ThenInclude(e => e.Dimensions)
+                .FirstOrDefaultAsync(e => e.PartID==partID);
 
             return part;
         }
 
-        private bool PartExists(long id)
+        private async Task<User> ReturnUser(long userID)
         {
-            return _context.Parts.Any(e => e.PartID == id);
+            User user = await _context.User.Include(e => e.CollectionParts)
+                .Include(e => e.CollectionSets)
+                .Include(e => e.FavoriteParts)
+                .Include(e => e.FavoriteSets)
+                .Include(e => e.WishlistParts)
+                .Include(e => e.WishlistSets)
+                .FirstOrDefaultAsync(e => e.UserID == userID);
+
+            return user;
         }
     }
 }

@@ -48,5 +48,21 @@ namespace LegoCompanionAPI.Controllers
             return user;
         }
 
+        // GET: api/User/5
+        [HttpGet]
+        public async Task<ActionResult<User>> GetUser(long id)
+        {
+            User user = await _context.User
+                .Include(e => e.CollectionParts).ThenInclude(e => e.Images)
+                .Include(e => e.CollectionSets).ThenInclude(e => e.Images)
+                .Include(e => e.FavoriteParts).ThenInclude(e => e.Images)
+                .Include(e => e.FavoriteSets).ThenInclude(e => e.Images)
+                .Include(e => e.WishlistParts).ThenInclude(e => e.Images)
+                .Include(e => e.WishlistSets).ThenInclude(e => e.Images)
+                .FirstOrDefaultAsync(e=>e.UserID==id);
+
+            return user;
+        }
+
     }
 }
