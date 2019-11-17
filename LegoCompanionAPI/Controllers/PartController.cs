@@ -49,7 +49,7 @@ namespace LegoCompanionAPI.Controllers
         }
 
         [HttpGet]
-        [Route("AddSetToWishList")]
+        [Route("AddPartToWishList")]
         public async Task<ActionResult<User>> AddSetToWishlist(long userId, long partId)
         {
             User user = await ReturnUser(userId);
