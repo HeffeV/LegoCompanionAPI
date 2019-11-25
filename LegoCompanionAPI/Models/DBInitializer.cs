@@ -9,7 +9,7 @@ namespace LegoCompanionAPI.Models
     {
         public static void Initialize(LegoContext context)
         {
-            context.Database.EnsureCreated();
+                context.Database.EnsureCreated();
 
             if(context.Parts.Any())
             { 
