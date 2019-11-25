@@ -239,18 +239,6 @@ namespace LegoCompanionAPI.Models
 
             context.Sets.Add(setBulldozer);
 
-            User user = new User();
-            user.GoogleID = "114370788929343747562";
-            user.Email = "jeffvandenbroeck99@gmail.com";
-            user.WishlistSets = new List<Set>()
-            {
-
-                setBulldozer
-
-            };
-
-            context.Users.Add(user);
-
             context.SaveChanges();
         }
     }
