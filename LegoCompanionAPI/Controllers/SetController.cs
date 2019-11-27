@@ -161,17 +161,17 @@ namespace LegoCompanionAPI.Controllers
 
         [HttpPost]
         [Route("AddSet")]
-        public async Task<ActionResult<long>> AddSet(Set set)
+        public async Task<ActionResult<Set>> AddSet(Set set)
         {
-
             if (!SetExists(set.LegoCode))
             {
                 _context.Sets.Add(set);
                 await _context.SaveChangesAsync();
-                return set.SetID;
+                return set;
             }
             return NotFound();
         }
+
 
         private async Task<Set> ReturnSet(long setID)
         {
