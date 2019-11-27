@@ -153,6 +153,20 @@ namespace LegoCompanionAPI.Controllers
             return user;
         }
 
+        [HttpPost]
+        [Route("AddPart")]
+        public async Task<ActionResult<long>> AddPart(Part part)
+        {
+
+            if (!PartExists(part.LegoCode))
+            {
+                _context.Parts.Add(part);
+                await _context.SaveChangesAsync();
+                return part.PartID;
+            }
+            return NotFound();
+        }
+
         private async Task<Part> ReturnPart(long partID)
         {
             Part part = await _context.Parts
@@ -175,6 +189,11 @@ namespace LegoCompanionAPI.Controllers
                 .FirstOrDefaultAsync(e => e.UserID == userID);
 
             return user;
+        }
+
+        private bool PartExists(int legocode)
+        {
+            return _context.Parts.Any(e => e.LegoCode == legocode);
         }
     }
 }

@@ -159,6 +159,20 @@ namespace LegoCompanionAPI.Controllers
             return @set;
         }
 
+        [HttpPost]
+        [Route("AddSet")]
+        public async Task<ActionResult<long>> AddSet(Set set)
+        {
+
+            if (!SetExists(set.LegoCode))
+            {
+                _context.Sets.Add(set);
+                await _context.SaveChangesAsync();
+                return set.SetID;
+            }
+            return NotFound();
+        }
+
         private async Task<Set> ReturnSet(long setID)
         {
             Set set =await _context.Sets
@@ -180,6 +194,11 @@ namespace LegoCompanionAPI.Controllers
                 .FirstOrDefaultAsync(e => e.UserID == userID);
 
             return user;
+        }
+
+        private bool SetExists(int legocode)
+        {
+            return _context.Sets.Any(e => e.LegoCode == legocode);
         }
     }
 }

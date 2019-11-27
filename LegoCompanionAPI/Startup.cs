@@ -38,6 +38,8 @@ namespace LegoCompanionAPI
 
             services.AddDbContext<LegoContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder => { builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); }));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(
             options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
@@ -60,6 +62,9 @@ namespace LegoCompanionAPI
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Member API v1"); });
 
             app.UseHttpsRedirection();
+
+            app.UseCors("MyPolicy");
+                
             app.UseMvc();
 
             DBInitializer.Initialize(context);
