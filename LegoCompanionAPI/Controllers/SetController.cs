@@ -185,7 +185,7 @@ namespace LegoCompanionAPI.Controllers
         }
 
         private async Task<User> ReturnUser(long userID) {
-            User user = await _context.User.Include(e => e.CollectionParts)
+            User user = await _context.Users.Include(e => e.CollectionParts)
                 .Include(e => e.CollectionSets)
                 .Include(e => e.FavoriteParts)
                 .Include(e => e.FavoriteSets)

@@ -25,7 +25,7 @@ namespace LegoCompanionAPI.Controllers
         [Route("UserData")]
         public async Task<ActionResult<User>> GetUserData(string id,string email)
         {
-            User user = await _context.User
+            User user = await _context.Users
                 .Include(e=>e.CollectionParts).ThenInclude(e => e.Images)
                 .Include(e => e.CollectionSets).ThenInclude(e => e.Images)
                 .Include(e => e.FavoriteParts).ThenInclude(e => e.Images)
@@ -42,7 +42,7 @@ namespace LegoCompanionAPI.Controllers
                     Email = email,
                 };
 
-                _context.User.Add(user);
+                _context.Users.Add(user);
             }
             await _context.SaveChangesAsync();
             return user;
@@ -52,7 +52,7 @@ namespace LegoCompanionAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<User>> GetUser(long id)
         {
-            User user = await _context.User
+            User user = await _context.Users
                 .Include(e => e.CollectionParts).ThenInclude(e => e.Images)
                 .Include(e => e.CollectionSets).ThenInclude(e => e.Images)
                 .Include(e => e.FavoriteParts).ThenInclude(e => e.Images)

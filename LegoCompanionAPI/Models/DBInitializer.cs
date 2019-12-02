@@ -237,6 +237,62 @@ namespace LegoCompanionAPI.Models
             setBulldozer.SetParts.Add(setPart5);
             setBulldozer.SetParts.Add(setPart6);
 
+            Theme theme = new Theme()
+            {
+                ThemeName = "Technic"
+            };
+
+            context.Themes.Add(theme);
+
+            theme = new Theme()
+            {
+                ThemeName = "City"
+            };
+
+            context.Themes.Add(theme);
+
+            theme = new Theme()
+            {
+                ThemeName = "Creator"
+            };
+
+            context.Themes.Add(theme);
+
+            theme = new Theme()
+            {
+                ThemeName = "StarWars"
+            };
+
+            context.Themes.Add(theme);
+
+            theme = new Theme()
+            {
+                ThemeName = "Minecraft"
+            };
+
+            context.Themes.Add(theme);
+
+            theme = new Theme()
+            {
+                ThemeName = "HarryPotter"
+            };
+
+            context.Themes.Add(theme);
+
+            theme = new Theme()
+            {
+                ThemeName = "Classic"
+            };
+
+            context.Themes.Add(theme);
+
+            theme = new Theme()
+            {
+                ThemeName = "Minifigures"
+            };
+
+            context.Themes.Add(theme);
+
             context.Sets.Add(setBulldozer);
 
             context.SaveChanges();

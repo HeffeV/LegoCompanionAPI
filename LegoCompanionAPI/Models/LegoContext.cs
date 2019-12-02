@@ -17,6 +17,7 @@ namespace LegoCompanionAPI.Models
         public DbSet<Dimensions> Dimensions { get; set; }
         public DbSet<SetPart> SetParts { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Theme> Themes { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         { 
             modelBuilder.Entity<Part>().ToTable("Part");
@@ -25,7 +26,7 @@ namespace LegoCompanionAPI.Models
             modelBuilder.Entity<Dimensions>().ToTable("Dimensions");
             modelBuilder.Entity<SetPart>().ToTable("SetPart");
             modelBuilder.Entity<User>().ToTable("User");
+            modelBuilder.Entity<Theme>().ToTable("Theme");
         }
-        public DbSet<LegoCompanionAPI.Models.User> User { get; set; }
     }
 }
