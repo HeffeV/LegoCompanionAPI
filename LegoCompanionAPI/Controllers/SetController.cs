@@ -184,12 +184,12 @@ namespace LegoCompanionAPI.Controllers
                 .Include(e => e.Images)
                 .Include(e => e.Dimensions)
                 .Include(e => e.SetParts).ThenInclude(e => e.Part).ThenInclude(e => e.Images)
-                .Where(e=>e.Theme==theme).ToListAsync();
+                .Where(e=>e.Theme.ToLower()==theme.ToLower()).ToListAsync();
             }
 
             if (theme==null && name != "")
             {
-                sets = await _context.Sets.Where(e => e.SetName.Contains(name))
+                sets = await _context.Sets.Where(e => e.SetName.ToLower().Contains(name.ToLower()))
                         .Include(e => e.Images)
                         .Include(e => e.Dimensions)
                         .Include(e => e.SetParts).ThenInclude(e => e.Part).ThenInclude(e => e.Images).ToListAsync();
@@ -197,7 +197,7 @@ namespace LegoCompanionAPI.Controllers
 
             if (theme != null && name != null)
             {
-                sets = await _context.Sets.Where(e => e.SetName.Contains(name)&& e.Theme == theme)
+                sets = await _context.Sets.Where(e => e.SetName.ToLower().Contains(name.ToLower()) && e.Theme.ToLower() == theme.ToLower())
                         .Include(e => e.Images)
                         .Include(e => e.Dimensions)
                         .Include(e => e.SetParts).ThenInclude(e => e.Part).ThenInclude(e => e.Images).ToListAsync();
