@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LegoCompanionAPI.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Data.SqlClient;
 
 namespace LegoCompanionAPI.Controllers
 {
@@ -170,6 +171,52 @@ namespace LegoCompanionAPI.Controllers
                 return set;
             }
             return NotFound();
+        }
+
+        [HttpGet]
+        [Route("FilterSets")]
+        public async Task<ActionResult<IEnumerable<Set>>>FilterSets(string name,string theme,bool az)
+        {
+            List<Set> sets = new List<Set>();
+            if (theme != "" && name==null)
+            {
+                sets = await _context.Sets
+                .Include(e => e.Images)
+                .Include(e => e.Dimensions)
+                .Include(e => e.SetParts).ThenInclude(e => e.Part).ThenInclude(e => e.Images)
+                .Where(e=>e.Theme==theme).ToListAsync();
+            }
+
+            if (theme==null && name != "")
+            {
+                sets = await _context.Sets.Where(e => e.SetName.Contains(name))
+                        .Include(e => e.Images)
+                        .Include(e => e.Dimensions)
+                        .Include(e => e.SetParts).ThenInclude(e => e.Part).ThenInclude(e => e.Images).ToListAsync();
+            }
+
+            if (theme != null && name != null)
+            {
+                sets = await _context.Sets.Where(e => e.SetName.Contains(name)&& e.Theme == theme)
+                        .Include(e => e.Images)
+                        .Include(e => e.Dimensions)
+                        .Include(e => e.SetParts).ThenInclude(e => e.Part).ThenInclude(e => e.Images).ToListAsync();
+            }
+
+            if (theme == null && name == null)
+            {
+                sets = await _context.Sets
+                    .Include(e => e.Images)
+                    .Include(e => e.Dimensions)
+                    .Include(e => e.SetParts).ThenInclude(e => e.Part).ThenInclude(e => e.Images).ToListAsync();
+            }
+
+            if (az)
+            {
+                var sortedsets=sets.OrderBy(e => e.SetName);
+                sets = sortedsets.ToList();
+            }
+            return sets;
         }
 
 
